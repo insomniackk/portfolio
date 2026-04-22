@@ -415,30 +415,37 @@ footer{
 <section class="contact" id="contact">
   <div class="section-label">Contact</div>
   <h2>Let's connect.</h2>
-  <p class="contact-sub">Open to research collaborations, internship opportunities, and interesting conversations.</p>
-  <form class="contact-form" onsubmit="handleSubmit(event)">
+  <p class="contact-sub">
+    Open to research collaborations, internship opportunities, and interesting conversations.
+  </p>
+
+  <form class="contact-form" action="https://formspree.io/f/mgorpyeg" method="POST">
+    
     <div class="form-row">
       <div class="form-field">
         <label>Name</label>
-        <input type="text" placeholder="Your name"/>
+        <input type="text" name="name" placeholder="Your name" required />
       </div>
+
       <div class="form-field">
         <label>Email</label>
-        <input type="email" placeholder="your@email.com"/>
+        <input type="email" name="email" placeholder="your@email.com" required />
       </div>
     </div>
+
     <div class="form-field">
       <label>Message</label>
-      <textarea rows="5" placeholder="What's on your mind?"></textarea>
+      <textarea name="message" rows="5" placeholder="What's on your mind?" required></textarea>
     </div>
+
     <button type="submit" class="btn-white">Send Message</button>
-    <div id="form-msg" style="font-size:0.82rem;color:rgba(255,255,255,0.6);display:none">Message sent! I'll get back to you soon.</div>
   </form>
- <div class="contact-links">
-  <a href="mailto:nkmar@bu.edu">nkmar@bu.edu</a>
-  <a href="https://www.linkedin.com/in/nivedhaa-n-kumar" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-  <a href="https://github.com/insomniackk" target="_blank" rel="noopener noreferrer">GitHub</a>
-</div>
+
+  <div class="contact-links">
+    <a href="mailto:nkmar@bu.edu">nkmar@bu.edu</a>
+    <a href="https://www.linkedin.com/in/nivedhaa-n-kumar" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/insomniackk" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
 </section>
 
 <footer>
@@ -446,14 +453,5 @@ footer{
   <span>Boston University · Data Science</span>
 </footer>
 
-<script>
-function handleSubmit(e){
-  e.preventDefault();
-  const msg=document.getElementById('form-msg');
-  msg.style.display='block';
-  e.target.reset();
-  setTimeout(()=>msg.style.display='none',4000);
-}
-</script>
 </body>
 </html>
