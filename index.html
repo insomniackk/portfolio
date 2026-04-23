@@ -98,7 +98,9 @@ h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color
 
 .about{background:var(--forest-pale);padding:6rem 4rem;}
 .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;max-width:1100px;margin:0 auto;}
-.about-image img{width:100%;object-fit:cover;border-radius:12px;}
+.about-image img{width:100%;object-fit:cover;border-radius:12px;max-height:420px;object-position:top;}
+.about-image{position:relative;}
+.fig-caption{font-family:var(--serif);font-size:0.85rem;color:#c9a84c;letter-spacing:0.05em;text-align:right;margin-top:0.5rem;}
 .about-text p{color:var(--muted);margin-bottom:1rem;font-size:1rem}
 .about-stats{display:flex;flex-direction:column;gap:1.5rem;border-left:1px solid var(--line);padding-left:3rem}
 .stat-num{font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--forest);line-height:1}
@@ -289,6 +291,8 @@ footer{
     </div>
     <div class="about-image">
       <img src="about-photo.jpg" alt="Nivedhaa" />
+      <div class="fig-caption">
+        <span class="fig-type"></span>
     </div>
   </div>
 </section>
@@ -509,6 +513,19 @@ if(saved){
   document.documentElement.setAttribute('data-theme', saved);
   document.querySelector('.theme-toggle').textContent = saved === 'dark' ? '☀︎' : '⏾';
 }
+</script>
+<script>
+  const text = "Figure 1. Nia et al., 2026";
+  const el = document.querySelector('.fig-type');
+  let i = 0;
+  function type(){
+    if(i < text.length){
+      el.textContent += text[i];
+      i++;
+      setTimeout(type, 60);
+    }
+  }
+  setTimeout(type, 1200);
 </script>
 </body>
 </html>
