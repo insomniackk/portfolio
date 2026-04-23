@@ -240,7 +240,7 @@ footer{
 <nav>
   <div class="nav-logo">Nivedhaa N. Kumar</div>
   <ul class="nav-links">
-    <button class="theme-toggle" onclick="toggleTheme()">dark</button>
+    <button class="theme-toggle" onclick="toggleTheme()">⏾</button>
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -482,16 +482,16 @@ footer{
   });
 
   function toggleTheme(){
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    document.querySelector('.theme-toggle').textContent = isDark ? 'dark' : 'light';
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  }
-  const saved = localStorage.getItem('theme');
-  if(saved){
-    document.documentElement.setAttribute('data-theme', saved);
-    document.querySelector('.theme-toggle').textContent = saved === 'dark' ? 'light' : 'dark';
-  }
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.querySelector('.theme-toggle').textContent = isDark ? '⏾' : '☀︎';
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+const saved = localStorage.getItem('theme');
+if(saved){
+  document.documentElement.setAttribute('data-theme', saved);
+  document.querySelector('.theme-toggle').textContent = saved === 'dark' ? '☀︎' : '⏾';
+}
 </script>
 </body>
 </html>
