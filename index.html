@@ -207,13 +207,21 @@ footer{
 
 @media(max-width:768px){
   nav{padding:1rem 1.5rem}
-  .hero,.about,section{padding:5rem 1.5rem}
-  .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;max-width:1200px;margin:0 auto;}
+  .nav-links{gap:1rem}
+  .nav-links a{font-size:0.7rem}
+  .hero,.about,section{padding:4rem 1.5rem}
+  .hero h1{font-size:2.8rem}
+  .hero-ctas{flex-direction:column}
+  .btn-primary,.btn-ghost{text-align:center}
+  .about-grid{grid-template-columns:1fr;gap:2rem}
+  .about-image{order:−1}
+  .about-image img{max-height:400px;object-fit:cover;object-position:top}
   .about-stats{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:2rem}
   .exp-item{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
   .school-badge{display:none}
   .form-row{grid-template-columns:1fr}
-  footer{flex-direction:column;gap:0.5rem;padding:1.5rem}
+  footer{flex-direction:column;gap:0.5rem;padding:1.5rem;text-align:center}
   .scroll-hint{display:none}
 }
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
