@@ -517,15 +517,26 @@ if(saved){
 <script>
   const text = "allegedly.";
   const el = document.querySelector('.fig-type');
-  let i = 0;
-  function type(){
-    if(i < text.length){
-      el.textContent += text[i];
-      i++;
-      setTimeout(type, 60);
-    }
-  }
-  setTimeout(type, 1200);
+  let typed = false;
+
+  const figObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting && !typed){
+        typed = true;
+        let i = 0;
+        function type(){
+          if(i < text.length){
+            el.textContent += text[i];
+            i++;
+            setTimeout(type, 60);
+          }
+        }
+        setTimeout(type, 400);
+      }
+    });
+  }, {threshold: 0.5});
+
+  figObserver.observe(document.querySelector('.fig-caption'));
 </script>
 </body>
 </html>
