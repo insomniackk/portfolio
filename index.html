@@ -211,6 +211,27 @@ footer{
 }
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
+
+[data-theme="dark"]{
+  --forest:#4a9e6a;
+  --forest-mid:#5bb87a;
+  --forest-light:#0f2a18;
+  --forest-pale:#0d1f12;
+  --white:#0a1a0f;
+  --ink:#e8f0ea;
+  --muted:#8ab899;
+  --line:#1e3d26;
+}
+
+.theme-toggle{
+  background:none;border:1px solid var(--line);
+  color:var(--muted);cursor:pointer;
+  padding:0.4rem 0.8rem;border-radius:2rem;
+  font-family:var(--sans);font-size:0.75rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  transition:all 0.2s;
+}
+.theme-toggle:hover{border-color:var(--forest);color:var(--forest)}
 </style>
 </head>
 <body>
@@ -219,6 +240,7 @@ footer{
 <nav>
   <div class="nav-logo">Nivedhaa N. Kumar</div>
   <ul class="nav-links">
+    <button class="theme-toggle" onclick="toggleTheme()">dark</button>
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -458,6 +480,18 @@ footer{
     el.classList.add('reveal');
     observer.observe(el);
   });
+
+  function toggleTheme(){
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.querySelector('.theme-toggle').textContent = isDark ? 'dark' : 'light';
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  }
+  const saved = localStorage.getItem('theme');
+  if(saved){
+    document.documentElement.setAttribute('data-theme', saved);
+    document.querySelector('.theme-toggle').textContent = saved === 'dark' ? 'light' : 'dark';
+  }
 </script>
 </body>
 </html>
