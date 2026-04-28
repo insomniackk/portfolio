@@ -222,6 +222,33 @@ h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color
 .contact-links a{font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s}
 .contact-links a:hover{color:var(--white)}
 
+.contact-heading-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.contact-heading-row h2{margin-bottom:0}
+.spotify-pill{
+  display:inline-flex;align-items:center;gap:0.65rem;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);
+  border-radius:2rem;padding:0.45rem 1rem 0.45rem 0.45rem;
+  text-decoration:none;transition:background 0.2s;cursor:default;
+}
+.spotify-pill.is-playing{cursor:pointer}
+.spotify-pill.is-playing:hover{background:rgba(255,255,255,0.13)}
+.spotify-art{width:36px;height:36px;border-radius:6px;object-fit:cover;flex-shrink:0}
+.spotify-art-placeholder{
+  width:36px;height:36px;border-radius:6px;
+  background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.spotify-art-placeholder svg{opacity:0.4}
+.spotify-info{display:flex;flex-direction:column;gap:0.1rem;min-width:0}
+.spotify-track{font-size:0.78rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px}
+.spotify-artist{font-size:0.68rem;color:rgba(255,255,255,0.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px}
+.spotify-eq{display:flex;align-items:flex-end;gap:2px;height:16px;flex-shrink:0}
+.spotify-eq span{display:block;width:3px;background:#1DB954;border-radius:2px;transform-origin:bottom}
+.spotify-eq span:nth-child(1){height:10px;animation:eq 0.9s ease-in-out infinite alternate}
+.spotify-eq span:nth-child(2){height:16px;animation:eq 0.7s ease-in-out infinite alternate 0.2s}
+.spotify-eq span:nth-child(3){height:7px;animation:eq 1.1s ease-in-out infinite alternate 0.1s}
+@keyframes eq{from{transform:scaleY(0.25)}to{transform:scaleY(1)}}
+.spotify-eq--paused span{animation:none;transform:scaleY(0.3);background:rgba(255,255,255,0.3)}
+
 footer{
   background:var(--forest);border-top:1px solid rgba(255,255,255,0.1);
   padding:1.5rem 4rem;display:flex;justify-content:space-between;align-items:center;
@@ -487,7 +514,21 @@ footer{
 
 <section class="contact" id="contact">
   <div class="section-label">Contact</div>
-  <h2>Let's connect.</h2>
+  <div class="contact-heading-row">
+    <h2>Let's connect.</h2>
+    <a class="spotify-pill" id="spotify-pill" target="_blank" rel="noopener noreferrer">
+      <div class="spotify-art-placeholder" id="spotify-art-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.52-.972c3.632-1.102 8.147-.568 11.233 1.328a.78.78 0 01.257 1.072zm.105-2.835c-3.223-1.914-8.54-2.09-11.618-1.156a.935.935 0 11-.543-1.79c3.532-1.072 9.404-.865 13.115 1.338a.936.936 0 01-1.006 1.583l.052.025z"/></svg>
+      </div>
+      <div class="spotify-info">
+        <span class="spotify-track" id="spotify-track">Not playing</span>
+        <span class="spotify-artist" id="spotify-artist">Spotify</span>
+      </div>
+      <div class="spotify-eq spotify-eq--paused" id="spotify-eq">
+        <span></span><span></span><span></span>
+      </div>
+    </a>
+  </div>
   <p class="contact-sub">
     Open to research collaborations, internship opportunities, and interesting conversations.
   </p>
@@ -574,6 +615,43 @@ if(saved){
   }, {threshold: 0.5});
 
   figObserver.observe(document.querySelector('.fig-caption'));
+</script>
+<script>
+  // Replace with your Vercel now-playing endpoint once deployed
+  const SPOTIFY_ENDPOINT = 'https://spotify-api-wheat-two.vercel.app/api/now-playing';
+
+  async function fetchNowPlaying() {
+    if (!SPOTIFY_ENDPOINT) return;
+    try {
+      const res = await fetch(SPOTIFY_ENDPOINT);
+      const data = await res.json();
+      const pill = document.getElementById('spotify-pill');
+      const track = document.getElementById('spotify-track');
+      const artist = document.getElementById('spotify-artist');
+      const eq = document.getElementById('spotify-eq');
+      const artWrap = document.getElementById('spotify-art-wrap');
+
+      if (data.isPlaying) {
+        track.textContent = data.title;
+        artist.textContent = data.artist;
+        pill.href = data.songUrl || '#';
+        pill.classList.add('is-playing');
+        eq.classList.remove('spotify-eq--paused');
+        if (data.albumArt) {
+          artWrap.innerHTML = `<img class="spotify-art" src="${data.albumArt}" alt="album art">`;
+        }
+      } else {
+        track.textContent = 'Not playing';
+        artist.textContent = 'Spotify';
+        pill.removeAttribute('href');
+        pill.classList.remove('is-playing');
+        eq.classList.add('spotify-eq--paused');
+      }
+    } catch(e) {}
+  }
+
+  fetchNowPlaying();
+  setInterval(fetchNowPlaying, 30000);
 </script>
 </body>
 </html>
