@@ -131,13 +131,16 @@ h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color
 .badge-chem{background:var(--forest-light);color:var(--forest)}
 .school-badge-img{padding:4px;}
 .logo-badge{
-  background:#fff;
-  border:1px solid #e0ddd6;
+  background:transparent;
+  border:none;
 }
+.school-badge-img{padding:0;}
 .school-badge-img img{
-  width:40px;height:40px;
+  width:44px;height:44px;
   object-fit:contain;
   display:block;
+  filter:grayscale(100%);
+  opacity:0.85;
 }
 
 .exp-date--with-tag{display:flex;align-items:center;gap:0.6rem}
@@ -339,7 +342,7 @@ footer{
     </div>
 
     <div class="exp-item">
-      <div class="school-badge school-badge-img logo-badge"><img src="assets/logos/emory.jpg" alt="Emory University"></div>
+      <div class="school-badge school-badge-img logo-badge"><img src="assets/logos/emory.png" alt="Emory University"></div>
       <div>
         <div class="exp-date">May – Oct 2025</div>
         <div class="exp-role">AI/ML Intern</div>
@@ -367,7 +370,7 @@ footer{
     </div>
 
     <div class="exp-item">
-      <div class="school-badge school-badge-img logo-badge"><img src="assets/logos/rochester-research.svg" alt="University of Rochester"></div>
+      <div class="school-badge school-badge-img logo-badge"><img src="assets/logos/rochester-research.png" alt="University of Rochester"></div>
       <div>
         <div class="exp-date">Jan – Dec 2025</div>
         <div class="exp-role">Research Assistant</div>
@@ -381,7 +384,7 @@ footer{
     </div>
 
     <div class="exp-item">
-      <div class="school-badge school-badge-img logo-badge"><img src="assets/logos/rochester-chem.svg" alt="University of Rochester"></div>
+      <div class="school-badge school-badge-img logo-badge"><img src="assets/logos/rochester-chem.png" alt="University of Rochester"></div>
       <div>
         <div class="exp-date">Aug – Dec 2025</div>
         <div class="exp-role">Chemistry Teaching Assistant</div>
