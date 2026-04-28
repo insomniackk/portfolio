@@ -222,10 +222,10 @@ h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color
 .contact-links a{font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s}
 .contact-links a:hover{color:var(--white)}
 
-.contact-heading-row{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;margin-bottom:1rem}
-.contact-heading-row h2{margin-bottom:0}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.contact-right{display:flex;align-items:center;justify-content:center}
 .spotify-card{
-  width:148px;border-radius:16px;overflow:hidden;
+  width:220px;border-radius:16px;overflow:hidden;
   background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);
   text-decoration:none;flex-shrink:0;transition:transform 0.2s,background 0.2s;cursor:default;
 }
@@ -514,56 +514,54 @@ footer{
 </section>
 
 <section class="contact" id="contact">
-  <div class="section-label">Contact</div>
-  <div class="contact-heading-row">
-    <a class="spotify-card" id="spotify-pill" target="_blank" rel="noopener noreferrer">
-      <div id="spotify-art-wrap">
-        <div class="spotify-card-placeholder">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.52-.972c3.632-1.102 8.147-.568 11.233 1.328a.78.78 0 01.257 1.072zm.105-2.835c-3.223-1.914-8.54-2.09-11.618-1.156a.935.935 0 11-.543-1.79c3.532-1.072 9.404-.865 13.115 1.338a.936.936 0 01-1.006 1.583l.052.025z"/></svg>
-        </div>
-      </div>
-      <div class="spotify-card-info">
-        <div class="spotify-card-top">
-          <span class="spotify-card-track" id="spotify-track">Not playing</span>
-          <div class="spotify-eq spotify-eq--paused" id="spotify-eq">
-            <span></span><span></span><span></span>
+  <div class="contact-layout">
+    <div class="contact-left">
+      <div class="section-label">Contact</div>
+      <h2>Let's connect.</h2>
+      <p class="contact-sub">
+        Open to research collaborations, internship opportunities, and interesting conversations.
+      </p>
+      <form class="contact-form" action="https://formspree.io/f/mgorpyeg" method="POST">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-field">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="your@email.com" required />
           </div>
         </div>
-        <div class="spotify-card-artist" id="spotify-artist">Spotify</div>
-      </div>
-    </a>
-    <h2>Let's connect.</h2>
-  </div>
-  <p class="contact-sub">
-    Open to research collaborations, internship opportunities, and interesting conversations.
-  </p>
-
-  <form class="contact-form" action="https://formspree.io/f/mgorpyeg" method="POST">
-    
-    <div class="form-row">
-      <div class="form-field">
-        <label>Name</label>
-        <input type="text" name="name" placeholder="Your name" required />
-      </div>
-
-      <div class="form-field">
-        <label>Email</label>
-        <input type="email" name="email" placeholder="your@email.com" required />
+        <div class="form-field">
+          <label>Message</label>
+          <textarea name="message" rows="5" placeholder="What's on your mind?" required></textarea>
+        </div>
+        <button type="submit" class="btn-white">Send Message</button>
+      </form>
+      <div class="contact-links">
+        <a href="mailto:nkmar@bu.edu">nkmar@bu.edu</a>
+        <a href="https://www.linkedin.com/in/nivedhaa-n-kumar" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/insomniackk" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </div>
-
-    <div class="form-field">
-      <label>Message</label>
-      <textarea name="message" rows="5" placeholder="What's on your mind?" required></textarea>
+    <div class="contact-right">
+      <a class="spotify-card" id="spotify-pill" target="_blank" rel="noopener noreferrer">
+        <div id="spotify-art-wrap">
+          <div class="spotify-card-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.52-.972c3.632-1.102 8.147-.568 11.233 1.328a.78.78 0 01.257 1.072zm.105-2.835c-3.223-1.914-8.54-2.09-11.618-1.156a.935.935 0 11-.543-1.79c3.532-1.072 9.404-.865 13.115 1.338a.936.936 0 01-1.006 1.583l.052.025z"/></svg>
+          </div>
+        </div>
+        <div class="spotify-card-info">
+          <div class="spotify-card-top">
+            <span class="spotify-card-track" id="spotify-track">Not playing</span>
+            <div class="spotify-eq spotify-eq--paused" id="spotify-eq">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="spotify-card-artist" id="spotify-artist">Spotify</div>
+        </div>
+      </a>
     </div>
-
-    <button type="submit" class="btn-white">Send Message</button>
-  </form>
-
-  <div class="contact-links">
-    <a href="mailto:nkmar@bu.edu">nkmar@bu.edu</a>
-    <a href="https://www.linkedin.com/in/nivedhaa-n-kumar" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="https://github.com/insomniackk" target="_blank" rel="noopener noreferrer">GitHub</a>
   </div>
 </section>
 
