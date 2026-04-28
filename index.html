@@ -238,10 +238,16 @@ h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color
   display:flex;align-items:center;justify-content:center;
 }
 .spotify-card-placeholder svg{opacity:0.3}
-.spotify-card-info{padding:0.6rem 0.75rem 0.75rem}
-.spotify-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.3rem}
-.spotify-card-track{font-size:0.75rem;font-weight:400;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.spotify-card-artist{font-size:0.65rem;color:rgba(255,255,255,0.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spotify-card-info{padding:0.75rem 0.9rem 0.9rem}
+.spotify-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.25rem}
+.spotify-card-track{font-size:0.78rem;font-weight:400;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spotify-card-artist{font-size:0.68rem;color:rgba(255,255,255,0.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spotify-progress{margin:0.7rem 0 0.5rem}
+.spotify-progress-bar{height:3px;background:rgba(255,255,255,0.15);border-radius:2px}
+.spotify-progress-fill{height:100%;background:#1DB954;border-radius:2px;width:28%;transition:width 0.5s}
+.spotify-controls{display:flex;align-items:center;justify-content:space-between;margin-top:0.5rem;padding:0 0.1rem}
+.spotify-ctrl{background:none;border:none;color:rgba(255,255,255,0.6);cursor:default;padding:0;display:flex;align-items:center;justify-content:center;line-height:1}
+.spotify-ctrl--play{color:#fff;transform:scale(1.25)}
 .spotify-eq{display:flex;align-items:flex-end;gap:2px;height:12px;flex-shrink:0}
 .spotify-eq span{display:block;width:3px;background:#1DB954;border-radius:2px;transform-origin:bottom}
 .spotify-eq span:nth-child(1){height:8px;animation:eq 0.9s ease-in-out infinite alternate}
@@ -559,6 +565,22 @@ footer{
             </div>
           </div>
           <div class="spotify-card-artist" id="spotify-artist">Spotify</div>
+          <div class="spotify-progress">
+            <div class="spotify-progress-bar">
+              <div class="spotify-progress-fill" id="spotify-progress"></div>
+            </div>
+          </div>
+          <div class="spotify-controls">
+            <button class="spotify-ctrl" tabindex="-1">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+            </button>
+            <button class="spotify-ctrl spotify-ctrl--play" tabindex="-1" id="spotify-play-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="spotify-play-icon"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <button class="spotify-ctrl" tabindex="-1">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zm2-8.14 5.14 3.64L8 15.87V9.86zM16 6h2v12h-2z"/></svg>
+            </button>
+          </div>
         </div>
       </a>
     </div>
@@ -634,12 +656,17 @@ if(saved){
       const eq = document.getElementById('spotify-eq');
       const artWrap = document.getElementById('spotify-art-wrap');
 
+      const playIcon = document.getElementById('spotify-play-icon');
+      const progress = document.getElementById('spotify-progress');
+
       if (data.isPlaying) {
         track.textContent = data.title;
         artist.textContent = data.artist;
         pill.href = data.songUrl || '#';
         pill.classList.add('is-playing');
         eq.classList.remove('spotify-eq--paused');
+        playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        if (progress) progress.style.width = '28%';
         if (data.albumArt) {
           artWrap.innerHTML = `<img class="spotify-card-art" src="${data.albumArt}" alt="album art">`;
         }
@@ -649,6 +676,8 @@ if(saved){
         pill.removeAttribute('href');
         pill.classList.remove('is-playing');
         eq.classList.add('spotify-eq--paused');
+        playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        if (progress) progress.style.width = '0%';
       }
     } catch(e) {}
   }
