@@ -247,9 +247,16 @@ h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color
 .spotify-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.25rem}
 .spotify-card-track{font-size:0.78rem;font-weight:400;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .spotify-card-artist{font-size:0.68rem;color:rgba(255,255,255,0.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.spotify-progress{margin:0.7rem 0 0.5rem}
+.spotify-art-wrap{position:relative}
+.spotify-logo-badge{
+  position:absolute;top:8px;right:8px;
+  width:22px;height:22px;opacity:0.85;
+}
+.spotify-progress{margin:0.7rem 0 0.4rem}
 .spotify-progress-bar{height:3px;background:rgba(255,255,255,0.15);border-radius:2px}
 .spotify-progress-fill{height:100%;background:#1DB954;border-radius:2px;width:28%;transition:width 0.5s}
+.spotify-timestamps{display:flex;justify-content:space-between;margin-top:0.3rem}
+.spotify-timestamps span{font-size:0.6rem;color:rgba(255,255,255,0.35);letter-spacing:0.04em;font-variant-numeric:tabular-nums}
 .spotify-controls{display:flex;align-items:center;justify-content:space-between;margin-top:0.5rem;padding:0 0.1rem}
 .spotify-ctrl{background:none;border:none;color:rgba(255,255,255,0.6);cursor:default;padding:0;display:flex;align-items:center;justify-content:center;line-height:1}
 .spotify-ctrl--play{color:#fff;transform:scale(1.25)}
@@ -557,10 +564,11 @@ footer{
     </div>
     <div class="contact-right">
       <a class="spotify-card" id="spotify-pill" target="_blank" rel="noopener noreferrer">
-        <div id="spotify-art-wrap">
+        <div id="spotify-art-wrap" class="spotify-art-wrap">
           <div class="spotify-card-placeholder">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="#1DB954"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.52-.972c3.632-1.102 8.147-.568 11.233 1.328a.78.78 0 01.257 1.072zm.105-2.835c-3.223-1.914-8.54-2.09-11.618-1.156a.935.935 0 11-.543-1.79c3.532-1.072 9.404-.865 13.115 1.338a.936.936 0 01-1.006 1.583l.052.025z"/></svg>
           </div>
+          <svg class="spotify-logo-badge" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.52-.972c3.632-1.102 8.147-.568 11.233 1.328a.78.78 0 01.257 1.072zm.105-2.835c-3.223-1.914-8.54-2.09-11.618-1.156a.935.935 0 11-.543-1.79c3.532-1.072 9.404-.865 13.115 1.338a.936.936 0 01-1.006 1.583l.052.025z"/></svg>
         </div>
         <div class="spotify-card-info">
           <div class="spotify-now-playing" id="spotify-now-playing">
@@ -577,6 +585,10 @@ footer{
           <div class="spotify-progress">
             <div class="spotify-progress-bar">
               <div class="spotify-progress-fill" id="spotify-progress"></div>
+            </div>
+            <div class="spotify-timestamps">
+              <span id="spotify-current">0:00</span>
+              <span id="spotify-duration">0:00</span>
             </div>
           </div>
           <div class="spotify-controls">
@@ -668,6 +680,13 @@ if(saved){
       const playIcon = document.getElementById('spotify-play-icon');
       const progress = document.getElementById('spotify-progress');
       const nowPlaying = document.getElementById('spotify-now-playing');
+      const currentEl = document.getElementById('spotify-current');
+      const durationEl = document.getElementById('spotify-duration');
+
+      const fmt = ms => {
+        const s = Math.floor(ms / 1000);
+        return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+      };
 
       if (data.isPlaying) {
         nowPlaying.classList.add('visible');
@@ -677,9 +696,13 @@ if(saved){
         pill.classList.add('is-playing');
         eq.classList.remove('spotify-eq--paused');
         playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-        if (progress) progress.style.width = '28%';
+        if (progress && data.durationMs) {
+          progress.style.width = `${(data.progressMs / data.durationMs) * 100}%`;
+        }
+        if (currentEl) currentEl.textContent = fmt(data.progressMs ?? 0);
+        if (durationEl) durationEl.textContent = fmt(data.durationMs ?? 0);
         if (data.albumArt) {
-          artWrap.innerHTML = `<img class="spotify-card-art" src="${data.albumArt}" alt="album art">`;
+          artWrap.innerHTML = `<img class="spotify-card-art" src="${data.albumArt}" alt="album art"><svg class="spotify-logo-badge" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.973-.519.781.781 0 01.52-.972c3.632-1.102 8.147-.568 11.233 1.328a.78.78 0 01.257 1.072zm.105-2.835c-3.223-1.914-8.54-2.09-11.618-1.156a.935.935 0 11-.543-1.79c3.532-1.072 9.404-.865 13.115 1.338a.936.936 0 01-1.006 1.583l.052.025z"/></svg>`;
         }
       } else {
         track.textContent = 'Not playing';
@@ -689,6 +712,8 @@ if(saved){
         eq.classList.add('spotify-eq--paused');
         playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
         if (progress) progress.style.width = '0%';
+        if (currentEl) currentEl.textContent = '0:00';
+        if (durationEl) durationEl.textContent = '0:00';
         nowPlaying.classList.remove('visible');
       }
     } catch(e) {}
