@@ -239,6 +239,11 @@ h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color
 }
 .spotify-card-placeholder svg{opacity:0.3}
 .spotify-card-info{padding:0.75rem 0.9rem 0.9rem}
+.spotify-now-playing{display:flex;align-items:center;gap:0.4rem;margin-bottom:0.5rem;opacity:0;transition:opacity 0.4s}
+.spotify-now-playing.visible{opacity:1}
+.spotify-now-playing span{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:#1DB954;font-family:var(--sans)}
+.spotify-live-dot{width:5px;height:5px;border-radius:50%;background:#1DB954;flex-shrink:0;animation:livepulse 1.6s ease-in-out infinite}
+@keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}}
 .spotify-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.25rem}
 .spotify-card-track{font-size:0.78rem;font-weight:400;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .spotify-card-artist{font-size:0.68rem;color:rgba(255,255,255,0.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -558,6 +563,10 @@ footer{
           </div>
         </div>
         <div class="spotify-card-info">
+          <div class="spotify-now-playing" id="spotify-now-playing">
+            <div class="spotify-live-dot"></div>
+            <span>Now playing</span>
+          </div>
           <div class="spotify-card-top">
             <span class="spotify-card-track" id="spotify-track">Not playing</span>
             <div class="spotify-eq spotify-eq--paused" id="spotify-eq">
@@ -658,8 +667,10 @@ if(saved){
 
       const playIcon = document.getElementById('spotify-play-icon');
       const progress = document.getElementById('spotify-progress');
+      const nowPlaying = document.getElementById('spotify-now-playing');
 
       if (data.isPlaying) {
+        nowPlaying.classList.add('visible');
         track.textContent = data.title;
         artist.textContent = data.artist;
         pill.href = data.songUrl || '#';
@@ -678,6 +689,7 @@ if(saved){
         eq.classList.add('spotify-eq--paused');
         playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
         if (progress) progress.style.width = '0%';
+        nowPlaying.classList.remove('visible');
       }
     } catch(e) {}
   }
