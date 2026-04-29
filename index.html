@@ -11,6 +11,7 @@
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://nkmar.com/thumbnail.png" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -218,6 +219,7 @@ h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color
   border:none;cursor:pointer;font-weight:500;transition:opacity 0.2s,transform 0.15s;align-self:flex-start;
 }
 .btn-white:hover{opacity:0.88;transform:translateY(-1px)}
+.btn-white:disabled{opacity:0.5;cursor:default;transform:none}
 .contact-links{display:flex;gap:1.5rem;margin-top:2rem}
 .contact-links a{font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s}
 .contact-links a:hover{color:var(--white)}
@@ -627,6 +629,34 @@ footer{
   document.querySelectorAll('.section-label, h2, .about-text p, .about-image, .exp-item, .project-card, .skill-group').forEach(el => {
     el.classList.add('reveal');
     observer.observe(el);
+  });
+
+  const contactForm = document.querySelector('.contact-form');
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = contactForm.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        contactForm.innerHTML = `
+          <div style="padding:2rem 0;display:flex;flex-direction:column;gap:0.5rem">
+            <span style="font-family:var(--serif);font-size:1.8rem;color:#fff;">Message sent.</span>
+            <span style="font-size:0.9rem;color:rgba(255,255,255,0.5);">I'll get back to you soon.</span>
+          </div>`;
+      } else {
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+    }
   });
 
   function toggleTheme(){
