@@ -31,7 +31,7 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--white);color:var(--ink);font-weight:300;line-height:1.7;overflow-x:hidden}
-*{cursor:none!important}
+@media(pointer:fine){*{cursor:none!important}}
 #custom-cursor{position:fixed;width:8px;height:8px;background:var(--forest);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:transform 0.1s,background 0.2s,opacity 0.2s;z-index:99999;opacity:0}
 
 nav{
@@ -821,20 +821,22 @@ if(saved){
   fetchNowPlaying();
   setInterval(fetchNowPlaying, 30000);
 
-  // Custom cursor
-  const cursor = document.createElement('div');
-  cursor.id = 'custom-cursor';
-  document.body.appendChild(cursor);
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    cursor.style.opacity = '1';
-  });
-  document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
-  document.querySelectorAll('a, button, [role="button"], .spotify-card').forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1.8)'; cursor.style.background = 'var(--forest-mid)'; });
-    el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; cursor.style.background = 'var(--forest)'; });
-  });
+  // Custom cursor — mouse only
+  if (window.matchMedia('(pointer:fine)').matches) {
+    const cursor = document.createElement('div');
+    cursor.id = 'custom-cursor';
+    document.body.appendChild(cursor);
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      cursor.style.opacity = '1';
+    });
+    document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
+    document.querySelectorAll('a, button, [role="button"], .spotify-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1.8)'; cursor.style.background = 'var(--forest-mid)'; });
+      el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; cursor.style.background = 'var(--forest)'; });
+    });
+  }
 </script>
 </body>
 </html>
