@@ -738,116 +738,6 @@ footer{
 
     <div class="project-card">
       <div class="project-info">
-        <div class="project-title">Ultrasound Image Quality Filter</div>
-        <p class="project-desc">Trained a modified ResNet50 classifier with AdamW + cosine LR scheduling. Applied UMAP and distance-based outlier detection to flag noisy images and visualize dataset structure.</p>
-        <div class="project-tags">
-          <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">UMAP</span><span class="tag">NumPy</span>
-        </div>
-        <a href="https://github.com/insomniackk/traindata" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-      </div>
-      <div class="project-demo demo-ultrasound">
-        <div class="us-monitor">
-        <div class="us-frame">
-          <div class="us-titlebar"><span></span><span></span><span></span></div>
-          <div class="us-screens">
-            <div class="us-screen"><img src="assets/umap-2d.png" alt="UMAP 2D" style="width:100%;height:100%;object-fit:contain;display:block"></div>
-            <div class="us-screen"><img src="assets/umap-hist.png" alt="Histogram" style="width:100%;height:100%;object-fit:contain;display:block"></div>
-            <div class="us-screen"><img src="assets/umap-3d.png" alt="UMAP 3D" style="width:100%;height:100%;object-fit:contain;display:block"></div>
-            <div class="us-screen"><img src="assets/umap-2d.png" alt="UMAP 2D" style="width:100%;height:100%;object-fit:contain;display:block"></div>
-          </div>
-        </div>
-        <div class="us-stand-neck"></div>
-        <div class="us-stand-base"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-info">
-        <div class="project-title">Stock Financial Analysis Tool</div>
-        <p class="project-desc">Automated data pipeline to scrape and structure financial metrics, integrating live market data via yfinance. Rule-based valuation framework using P/E ratios, revenue growth, and earnings trends.</p>
-        <div class="project-tags">
-          <span class="tag">Python</span><span class="tag">BeautifulSoup</span><span class="tag">yfinance</span>
-        </div>
-        <a href="https://github.com/insomniackk/stock-analyzer" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-      </div>
-      <div class="project-demo demo-stock">
-        <div class="stk-terminal">
-          <div class="stk-titlebar"><span></span><span></span><span></span></div>
-          <div class="stk-body">
-            <div class="stk-cmd">$ analyze <span class="stk-ticker">AAPL</span><span class="stk-cur">▋</span></div>
-            <div class="stk-out">
-              <div class="stk-head">Apple Inc. (AAPL) | Technology</div>
-              <div class="stk-div">──────────────────────────</div>
-              <div class="stk-row"><span class="stk-label">Valuation</span><div class="stk-bar"><div class="stk-fill" style="--pct:30%"></div></div><span class="stk-score">30</span></div>
-              <div class="stk-row"><span class="stk-label">Profitab.</span><div class="stk-bar"><div class="stk-fill" style="--pct:93%"></div></div><span class="stk-score">93</span></div>
-              <div class="stk-row"><span class="stk-label">Momentum</span><div class="stk-bar"><div class="stk-fill" style="--pct:55%"></div></div><span class="stk-score">55</span></div>
-              <div class="stk-row"><span class="stk-label">Health</span><div class="stk-bar"><div class="stk-fill" style="--pct:75%"></div></div><span class="stk-score">75</span></div>
-              <div class="stk-div">──────────────────────────</div>
-              <div class="stk-composite">COMPOSITE: 61/100</div>
-              <div class="stk-verdict">VERDICT: NEUTRAL / HOLD</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-info">
-        <div class="project-title">Cancer Detection Pipeline</div>
-        <p class="project-desc">End-to-end CNN/Transformer pipeline for endometrial cancer detection from ultrasound images. Achieved 89% classification accuracy using contrastive learning and custom feature engineering.</p>
-        <div class="project-tags">
-          <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">CNNs</span><span class="tag">Transformers</span>
-        </div>
-        <a href="https://github.com/insomniackk/ult_repo.git" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-      </div>
-      <div class="project-demo demo-cancer">
-        <div class="cdc-window">
-          <div class="cdc-titlebar"><span></span><span></span><span></span><span class="cdc-tb-label">endometrial_cls.py</span></div>
-          <div class="cdc-body">
-            <div class="cdc-pid-wrap">
-              <span class="cdc-pid cdc-pid1">▸ patient_024_01.bmp</span>
-              <span class="cdc-pid cdc-pid2">▸ patient_087_03.bmp</span>
-              <span class="cdc-pid cdc-pid3">▸ patient_156_02.bmp</span>
-            </div>
-            <div class="cdc-scan">
-              <div class="cdc-tissue"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><filter id="usf"><feTurbulence type="fractalNoise" baseFrequency="0.82 0.78" numOctaves="4" seed="7" stitchTiles="stitch" result="n"/><feColorMatrix type="saturate" values="0" in="n"/></filter></defs><rect width="100%" height="100%" fill="#040e06"/><rect width="100%" height="100%" filter="url(#usf)" opacity="0.88"/></svg></div>
-              <div class="cdc-beam"></div>
-              <div class="cdc-result cdc-r1"><span class="cdc-badge cdc-benign-badge">BENIGN</span><span class="cdc-conf">p=0.06 · 94% confidence</span></div>
-              <div class="cdc-result cdc-r2"><span class="cdc-badge cdc-cancer-badge">CANCER</span><span class="cdc-conf">p=0.78 · 78% confidence</span></div>
-              <div class="cdc-result cdc-r3"><span class="cdc-badge cdc-benign-badge">BENIGN</span><span class="cdc-conf">p=0.09 · 91% confidence</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-info">
-        <div class="project-title">Metabolic Cost Decision-Making App</div>
-        <p class="project-desc">Full-stack React application built for a Georgia Tech behavioral study exploring how physical effort influences decision-making, enabling real-time experimental tasks and structured participant data collection.</p>
-        <div class="project-tags">
-          <span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">Full-Stack</span>
-        </div>
-        <a href="https://github.com/insomniackk/metabolic_cost_upd" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
-      </div>
-      <div class="project-demo demo-metabolic">
-        <div class="met-win">
-          <div class="met-titlebar"><span></span><span></span><span></span></div>
-          <div class="met-content">
-            <div class="met-screen met-s1"><img src="assets/met-welcome.png" alt="Welcome screen"></div>
-            <div class="met-screen met-s2"><img src="assets/met-chest.png" alt="Choose chest screen"></div>
-            <div class="met-screen met-s3"><img src="assets/met-coins.png" alt="Reward screen"></div>
-            <svg class="met-cursor" viewBox="0 0 16 22" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 1 L1 17 L5 13 L8 20 L10.5 19 L7.5 12 L13 12 Z" fill="white" stroke="#333" stroke-width="1.2" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-info">
         <div class="project-title">Network Intrusion Detection System</div>
         <p class="project-desc">Machine learning pipeline to detect DDoS attacks in real network traffic using the CICIDS2017 dataset. Trained a Random Forest classifier achieving 99.99% accuracy and applied UMAP dimensionality reduction to visualize attack vs. normal traffic clusters in 3D.</p>
         <div class="project-tags">
@@ -910,6 +800,116 @@ footer{
               <div class="nids-verdict">⚠ DDOS DETECTED · 25,724 flows</div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-info">
+        <div class="project-title">Cancer Detection Pipeline</div>
+        <p class="project-desc">End-to-end CNN/Transformer pipeline for endometrial cancer detection from ultrasound images. Achieved 89% classification accuracy using contrastive learning and custom feature engineering.</p>
+        <div class="project-tags">
+          <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">CNNs</span><span class="tag">Transformers</span>
+        </div>
+        <a href="https://github.com/insomniackk/ult_repo.git" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
+      </div>
+      <div class="project-demo demo-cancer">
+        <div class="cdc-window">
+          <div class="cdc-titlebar"><span></span><span></span><span></span><span class="cdc-tb-label">endometrial_cls.py</span></div>
+          <div class="cdc-body">
+            <div class="cdc-pid-wrap">
+              <span class="cdc-pid cdc-pid1">▸ patient_024_01.bmp</span>
+              <span class="cdc-pid cdc-pid2">▸ patient_087_03.bmp</span>
+              <span class="cdc-pid cdc-pid3">▸ patient_156_02.bmp</span>
+            </div>
+            <div class="cdc-scan">
+              <div class="cdc-tissue"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><filter id="usf"><feTurbulence type="fractalNoise" baseFrequency="0.82 0.78" numOctaves="4" seed="7" stitchTiles="stitch" result="n"/><feColorMatrix type="saturate" values="0" in="n"/></filter></defs><rect width="100%" height="100%" fill="#040e06"/><rect width="100%" height="100%" filter="url(#usf)" opacity="0.88"/></svg></div>
+              <div class="cdc-beam"></div>
+              <div class="cdc-result cdc-r1"><span class="cdc-badge cdc-benign-badge">BENIGN</span><span class="cdc-conf">p=0.06 · 94% confidence</span></div>
+              <div class="cdc-result cdc-r2"><span class="cdc-badge cdc-cancer-badge">CANCER</span><span class="cdc-conf">p=0.78 · 78% confidence</span></div>
+              <div class="cdc-result cdc-r3"><span class="cdc-badge cdc-benign-badge">BENIGN</span><span class="cdc-conf">p=0.09 · 91% confidence</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-info">
+        <div class="project-title">Stock Financial Analysis Tool</div>
+        <p class="project-desc">Automated data pipeline to scrape and structure financial metrics, integrating live market data via yfinance. Rule-based valuation framework using P/E ratios, revenue growth, and earnings trends.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">BeautifulSoup</span><span class="tag">yfinance</span>
+        </div>
+        <a href="https://github.com/insomniackk/stock-analyzer" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
+      </div>
+      <div class="project-demo demo-stock">
+        <div class="stk-terminal">
+          <div class="stk-titlebar"><span></span><span></span><span></span></div>
+          <div class="stk-body">
+            <div class="stk-cmd">$ analyze <span class="stk-ticker">AAPL</span><span class="stk-cur">▋</span></div>
+            <div class="stk-out">
+              <div class="stk-head">Apple Inc. (AAPL) | Technology</div>
+              <div class="stk-div">──────────────────────────</div>
+              <div class="stk-row"><span class="stk-label">Valuation</span><div class="stk-bar"><div class="stk-fill" style="--pct:30%"></div></div><span class="stk-score">30</span></div>
+              <div class="stk-row"><span class="stk-label">Profitab.</span><div class="stk-bar"><div class="stk-fill" style="--pct:93%"></div></div><span class="stk-score">93</span></div>
+              <div class="stk-row"><span class="stk-label">Momentum</span><div class="stk-bar"><div class="stk-fill" style="--pct:55%"></div></div><span class="stk-score">55</span></div>
+              <div class="stk-row"><span class="stk-label">Health</span><div class="stk-bar"><div class="stk-fill" style="--pct:75%"></div></div><span class="stk-score">75</span></div>
+              <div class="stk-div">──────────────────────────</div>
+              <div class="stk-composite">COMPOSITE: 61/100</div>
+              <div class="stk-verdict">VERDICT: NEUTRAL / HOLD</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-info">
+        <div class="project-title">Metabolic Cost Decision-Making App</div>
+        <p class="project-desc">Full-stack React application built for a Georgia Tech behavioral study exploring how physical effort influences decision-making, enabling real-time experimental tasks and structured participant data collection.</p>
+        <div class="project-tags">
+          <span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">Full-Stack</span>
+        </div>
+        <a href="https://github.com/insomniackk/metabolic_cost_upd" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
+      </div>
+      <div class="project-demo demo-metabolic">
+        <div class="met-win">
+          <div class="met-titlebar"><span></span><span></span><span></span></div>
+          <div class="met-content">
+            <div class="met-screen met-s1"><img src="assets/met-welcome.png" alt="Welcome screen"></div>
+            <div class="met-screen met-s2"><img src="assets/met-chest.png" alt="Choose chest screen"></div>
+            <div class="met-screen met-s3"><img src="assets/met-coins.png" alt="Reward screen"></div>
+            <svg class="met-cursor" viewBox="0 0 16 22" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1 L1 17 L5 13 L8 20 L10.5 19 L7.5 12 L13 12 Z" fill="white" stroke="#333" stroke-width="1.2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-info">
+        <div class="project-title">Ultrasound Image Quality Filter</div>
+        <p class="project-desc">Trained a modified ResNet50 classifier with AdamW + cosine LR scheduling. Applied UMAP and distance-based outlier detection to flag noisy images and visualize dataset structure.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">UMAP</span><span class="tag">NumPy</span>
+        </div>
+        <a href="https://github.com/insomniackk/traindata" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
+      </div>
+      <div class="project-demo demo-ultrasound">
+        <div class="us-monitor">
+        <div class="us-frame">
+          <div class="us-titlebar"><span></span><span></span><span></span></div>
+          <div class="us-screens">
+            <div class="us-screen"><img src="assets/umap-2d.png" alt="UMAP 2D" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+            <div class="us-screen"><img src="assets/umap-hist.png" alt="Histogram" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+            <div class="us-screen"><img src="assets/umap-3d.png" alt="UMAP 3D" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+            <div class="us-screen"><img src="assets/umap-2d.png" alt="UMAP 2D" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+          </div>
+        </div>
+        <div class="us-stand-neck"></div>
+        <div class="us-stand-base"></div>
         </div>
       </div>
     </div>
