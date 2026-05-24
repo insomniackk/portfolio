@@ -491,22 +491,54 @@ footer{
 .hero-inner>*{animation:fadeUp 0.7s ease both}
 .hero-tag{animation-delay:0.1s}.hero h1{animation-delay:0.25s}.hero-sub{animation-delay:0.4s}.hero-ctas{animation-delay:0.55s}
 
+/* HAMBURGER */
+.nav-hamburger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;padding:4px;cursor:pointer;z-index:101;
+}
+.nav-hamburger span{
+  display:block;width:22px;height:1.5px;
+  background:var(--forest);border-radius:2px;
+  transition:transform 0.25s,opacity 0.25s;
+}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-mobile{
+  display:none;
+  position:absolute;top:100%;left:0;right:0;
+  background:color-mix(in srgb,var(--white) 96%,transparent);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  padding:1.25rem 1.5rem;
+  flex-direction:column;gap:0;
+}
+.nav-mobile.open{display:flex}
+.nav-mobile a{
+  font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  padding:0.85rem 0;border-bottom:1px solid var(--line);
+  transition:color 0.2s;
+}
+.nav-mobile a:last-child{border-bottom:none}
+.nav-mobile a:hover{color:var(--forest)}
+
 @media(max-width:768px){
   nav{padding:1rem 1.5rem}
   .nav-links{display:none}
-  .nav-links a{font-size:0.7rem}
+  .nav-hamburger{display:flex}
   .hero,.about,section{padding:4rem 1.5rem}
   .hero h1{font-size:2.8rem}
   .hero-ctas{flex-direction:column}
   .btn-primary,.btn-ghost{text-align:center}
   .about-grid{grid-template-columns:1fr;gap:2rem}
-  .about-image{order:−1}
   .about-image img{max-height:400px;object-fit:cover;object-position:top}
   .about-stats{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:2rem}
-  .exp-item{grid-template-columns:1fr}
+  .film-frame{min-width:155px;padding:1.5rem 1.25rem 1.75rem}
+  .film-role{font-size:1.05rem}
+  .film-logo{width:30px;height:30px}
   .project-card{grid-template-columns:1fr}
   .project-demo{display:none}
-  .school-badge{display:none}
   .form-row{grid-template-columns:1fr}
   .contact-layout{grid-template-columns:1fr;gap:2.5rem}
   .contact-right{justify-content:flex-start}
@@ -559,6 +591,15 @@ footer{
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-mobile" id="nav-mobile">
+    <a href="#about" onclick="closeNav()">About</a>
+    <a href="#experience" onclick="closeNav()">Experience</a>
+    <a href="#projects" onclick="closeNav()">Projects</a>
+    <a href="#contact" onclick="closeNav()">Contact</a>
+  </div>
 </nav>
 
 <section class="hero">
@@ -1028,6 +1069,17 @@ footer{
       btn.disabled = false;
     }
   });
+
+  function toggleNav(){
+    const btn = document.querySelector('.nav-hamburger');
+    const menu = document.getElementById('nav-mobile');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  }
+  function closeNav(){
+    document.querySelector('.nav-hamburger').classList.remove('open');
+    document.getElementById('nav-mobile').classList.remove('open');
+  }
 
   function toggleTheme(){
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
