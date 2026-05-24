@@ -124,58 +124,32 @@ h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color
 .stat-num{font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--forest);line-height:1}
 .stat-label{font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:0.25rem}
 
-/* EXPERIENCE */
-.exp-list{max-width:820px;display:flex;flex-direction:column}
-.exp-item{
-  padding:2rem 0;
-  border-bottom:1px solid var(--line);
-  display:grid;grid-template-columns:72px 1fr;gap:1rem;
-  align-items:start;
+/* EXPERIENCE FILM STRIP */
+.film-wrap{background:#f2f2f2;border:1px solid #e0e0e0;border-radius:12px;overflow:hidden}
+.film-frames{display:flex;overflow-x:auto;scrollbar-width:none}
+.film-frames::-webkit-scrollbar{display:none}
+.film-frame{
+  flex:1 1 0;min-width:180px;
+  border-right:1px solid #e0e0e0;
+  padding:2rem 1.75rem 2.25rem;
+  display:flex;flex-direction:column;gap:0.1rem;
+  transition:background 0.2s;
 }
-.exp-item:first-child{border-top:1px solid var(--line)}
-
-/* SCHOOL BADGE */
-.school-badge{
-  width:56px;height:56px;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--serif);font-size:1rem;font-weight:500;
-  flex-shrink:0;margin-top:0.2rem;letter-spacing:0.02em;
-  margin-left:auto;margin-right:auto;
+.film-frame:last-child{border-right:none}
+.film-frame:hover{background:#fff}
+.film-num{font-family:monospace;font-size:0.6rem;letter-spacing:0.22em;color:#999;margin-bottom:1rem}
+.film-logo{width:38px;height:38px;object-fit:contain;filter:grayscale(1);opacity:0.55;margin-bottom:0.6rem;flex-shrink:0}
+.film-role{font-family:var(--serif);font-size:1.25rem;font-weight:400;color:var(--forest);line-height:1.2}
+.film-org{font-size:0.68rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-top:0.2rem}
+@media(prefers-color-scheme:dark){
+  .film-wrap{background:#0b130d;border-color:transparent}
+  .film-frame{border-right-color:#182518}
+  .film-frame:hover{background:#141f14}
+  .film-num{color:#2e4e30}
+  .film-logo{filter:brightness(0) invert(1);opacity:0.8}
+  .film-role{color:#bdd4be}
+  .film-org{color:#3d5c3e}
 }
-.badge-emory{background:#002878;color:#fff}
-.badge-gt{background:#B3A369;color:#003057}
-.badge-ur{background:#003B71;color:#FAD947}
-.badge-chem{background:var(--forest-light);color:var(--forest)}
-.school-badge-img{padding:4px;}
-.logo-badge{
-  background:transparent;
-  border:none;
-}
-.school-badge-img{padding:0;}
-.school-badge-img img{
-  width:56px;height:56px;
-  object-fit:contain;
-  display:block;
-  filter:grayscale(100%);
-  opacity:0.85;
-}
-
-.exp-date--with-tag{display:flex;align-items:center;gap:0.6rem}
-.pill{
-  font-size:0.65rem;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  padding:0.15rem 0.6rem;
-  border-radius:2rem;
-}
-.pill--soft{background:var(--forest-light);color:var(--forest)}
-
-.exp-date{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
-.exp-role{font-family:var(--serif);font-size:1.3rem;font-weight:400;color:var(--forest);margin-bottom:0.15rem}
-.exp-org{font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--forest-mid);margin-bottom:0.8rem}
-.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:0.4rem}
-.exp-bullets li{font-size:0.9rem;color:var(--muted);padding-left:1.2rem;position:relative;line-height:1.6}
-.exp-bullets li::before{content:'—';position:absolute;left:0;color:var(--forest-mid)}
 
 .projects{background:var(--forest-pale)}
 .projects-grid{display:flex;flex-direction:column;gap:1.25rem;max-width:960px;margin:0 auto;}
@@ -621,76 +595,44 @@ footer{
   <div class="section-label">Experience</div>
   <h2>Where I've worked.</h2>
   <div class="section-spacer"></div>
-  <div class="exp-list">
+  <div class="film-wrap">
+    <div class="film-frames">
 
-    <div class="exp-item">
-      <div class="school-badge school-badge-img logo-badge"><img src="assets/logos/tcs.png" alt="Tata Consultancy Services" loading="lazy"></div>
-      <div>
-        <div class="exp-date exp-date--with-tag">
-          Summer 2026
-          <span class="pill pill--soft">Incoming</span>
-        </div>
-        <div class="exp-role">AI Engineer Intern</div>
-        <div class="exp-org">Tata Consultancy Services · Montreal, Quebec · Hybrid</div>
-        <ul class="exp-bullets">
-          <li>Incoming AI Engineer Intern focused on applied AI and machine learning solutions</li>
-        </ul>
+      <div class="film-frame">
+        <div class="film-num">01</div>
+        <img class="film-logo" src="assets/logos/emory.png" alt="Emory University" loading="lazy">
+        <div class="film-role">AI/ML Intern</div>
+        <div class="film-org">Emory University · May–Oct 2025</div>
       </div>
-    </div>
 
-    <div class="exp-item">
-      <div class="school-badge school-badge-img logo-badge"><img src="assets/logos/emory.png" alt="Emory University" loading="lazy"></div>
-      <div>
-        <div class="exp-date">May – Oct 2025</div>
-        <div class="exp-role">AI/ML Intern</div>
-        <div class="exp-org">Emory University · Atlanta, Georgia</div>
-        <ul class="exp-bullets">
-          <li>Designed CNN and Transformer models in PyTorch/TensorFlow, achieving 89% accuracy on endometrial ultrasound datasets</li>
-          <li>Built end-to-end pipeline: preprocessing, segmentation, feature engineering, and contrastive learning</li>
-          <li>Cut model training time 6× (3+ hrs → 30 min) through architecture and preprocessing optimization</li>
-        </ul>
+      <div class="film-frame">
+        <div class="film-num">02</div>
+        <img class="film-logo" src="assets/logos/gatech.png" alt="Georgia Tech" loading="lazy">
+        <div class="film-role">Data Engineering Intern</div>
+        <div class="film-org">Georgia Tech · May–Aug 2025</div>
       </div>
-    </div>
 
-    <div class="exp-item">
-      <div class="school-badge school-badge-img logo-badge"><img src="assets/logos/gatech.png" alt="Georgia Institute of Technology" loading="lazy"></div>
-      <div>
-        <div class="exp-date">May – Aug 2025</div>
-        <div class="exp-role">Data Engineering Intern</div>
-        <div class="exp-org">Georgia Tech · Atlanta, Georgia</div>
-        <ul class="exp-bullets">
-          <li>Built full-stack React dashboard for behavioral experiment data collection and visualization</li>
-          <li>Designed real-time data ingestion pipeline integrating hardware instrumentation</li>
-          <li>Enabled psychologists to run studies 4× faster through streamlined experiment setup</li>
-        </ul>
+      <div class="film-frame">
+        <div class="film-num">03</div>
+        <img class="film-logo" src="assets/logos/rochester-research.svg" alt="University of Rochester" loading="lazy">
+        <div class="film-role">Research Assistant</div>
+        <div class="film-org">U of Rochester · Jan–Dec 2025</div>
       </div>
-    </div>
 
-    <div class="exp-item">
-      <div class="school-badge school-badge-img logo-badge"><img src="assets/logos/rochester-research.svg" alt="University of Rochester" loading="lazy"></div>
-      <div>
-        <div class="exp-date">Jan – Dec 2025</div>
-        <div class="exp-role">Research Assistant</div>
-        <div class="exp-org">University of Rochester · Rochester, New York</div>
-        <ul class="exp-bullets">
-          <li>Queried and cleaned large-scale signal metadata using SQL for downstream statistical analysis</li>
-          <li>Co-designed ultrasound probe for real-time fetal brain monitoring to detect birth asphyxia</li>
-          <li>Generated visualizations from raw ultrasonic signals to support clinical interpretation</li>
-        </ul>
+      <div class="film-frame">
+        <div class="film-num">04</div>
+        <img class="film-logo" src="assets/logos/rochester-chem.svg" alt="University of Rochester" loading="lazy">
+        <div class="film-role">Chemistry TA</div>
+        <div class="film-org">U of Rochester · Aug–Dec 2025</div>
       </div>
-    </div>
 
-    <div class="exp-item">
-      <div class="school-badge school-badge-img logo-badge"><img src="assets/logos/rochester-chem.svg" alt="University of Rochester" loading="lazy"></div>
-      <div>
-        <div class="exp-date">Aug – Dec 2025</div>
-        <div class="exp-role">Chemistry Teaching Assistant</div>
-        <div class="exp-org">University of Rochester · Rochester, New York</div>
-        <ul class="exp-bullets">
-          <li>Led two weekly recitation sections for 30+ students, improving exam scores by 30%</li>
-          <li>Graded 120+ exams per cycle with detailed performance feedback</li>
-        </ul>
+      <div class="film-frame">
+        <div class="film-num">05</div>
+        <img class="film-logo" src="assets/logos/tcs.png" alt="Tata Consultancy Services" loading="lazy">
+        <div class="film-role">AI Engineer Intern</div>
+        <div class="film-org">TCS · Montreal · Summer 2026</div>
       </div>
+
     </div>
   </div>
 </section>
@@ -941,9 +883,6 @@ footer{
     <div class="contact-left">
       <div class="section-label">Contact</div>
       <h2>Let's connect.</h2>
-      <p class="contact-sub">
-        Open to research collaborations, internship opportunities, and interesting conversations.
-      </p>
       <form class="contact-form" action="https://formspree.io/f/mgorpyeg" method="POST">
         <div class="form-row">
           <div class="form-field">
