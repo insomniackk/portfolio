@@ -388,14 +388,41 @@ h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color
   100%{transform:translate(112px,134px) scale(1);opacity:1}
 }
 
-/* Demo 6 · Network IDS – node graph */
-.net-scene{position:relative;width:160px;height:130px}
-.net-lines{position:absolute;inset:0;width:100%;height:100%}
-.net-node{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--forest-mid);transform:translate(-50%,-50%)}
-.nn-c{top:50%;left:50%}.nn-1{top:20%;left:22%}.nn-2{top:18%;left:72%}.nn-3{top:72%;left:16%}.nn-4{top:78%;left:72%}.nn-5{top:46%;left:88%}
-.project-card:hover .nn-3{animation:nodeAlert .9s ease infinite .1s}
-.project-card:hover .nn-5{animation:nodeAlert .9s ease infinite .4s}
-@keyframes nodeAlert{0%,100%{background:var(--forest-mid)}50%{background:#c0392b;box-shadow:0 0 10px rgba(192,57,43,.6)}}
+/* Demo 6 · Network IDS – classifier terminal */
+.demo-network{background:#060d08}
+.nids-term{width:226px;border-radius:10px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.6)}
+.nids-titlebar{display:flex;gap:4px;padding:6px 8px;background:#1c1c1e;border-bottom:1px solid #2a2a2a}
+.nids-titlebar span{width:6px;height:6px;border-radius:50%}
+.nids-titlebar span:nth-child(1){background:#ff5f57}
+.nids-titlebar span:nth-child(2){background:#ffbd2e}
+.nids-titlebar span:nth-child(3){background:#28ca41}
+.nids-body{background:#060d08;padding:9px 12px;font-family:monospace;color:#4afa7a;line-height:1.7}
+.nids-cmd{font-size:0.52rem;margin-bottom:6px}
+.nids-ticker{color:#fff;display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:bottom;width:0;animation:nidsType 12s infinite}
+@keyframes nidsType{0%{width:0;animation-timing-function:steps(14,end)}18%{width:14ch}90%{width:14ch}100%{width:0}}
+.nids-cur{animation:nidsBlink 12s linear infinite}
+@keyframes nidsBlink{0%{opacity:1}2%{opacity:0}3%{opacity:1}17%{opacity:0}18%,90%{opacity:0}91%,100%{opacity:1}}
+.nids-umap{width:202px;height:82px;border-radius:4px;overflow:hidden;margin-bottom:6px;opacity:0;animation:nidsUmap 12s ease infinite}
+@keyframes nidsUmap{0%,20%{opacity:0}25%,84%{opacity:1}91%,100%{opacity:0}}
+.nids-umap svg{width:100%;height:100%;display:block}
+.nids-out{display:flex;flex-direction:column;gap:2px;animation:nidsOut 12s ease infinite}
+@keyframes nidsOut{0%,22%{opacity:0}27%,84%{opacity:1}91%,100%{opacity:0}}
+.nids-head{font-size:0.5rem;color:#fff;white-space:nowrap}
+.nids-div{font-size:0.5rem;color:#2a2a2a}
+.nids-row{display:flex;align-items:center;gap:5px}
+.nids-lbl{font-size:0.44rem;color:#888;width:52px;flex-shrink:0}
+.nids-bar{flex:1;height:5px;background:#1e1e1e;border-radius:3px;overflow:hidden}
+.nids-fill{height:100%;width:0;border-radius:3px;animation:nidsFill 12s ease infinite}
+.nids-row:nth-child(3) .nids-fill{background:#4afa7a;animation-delay:0s}
+.nids-row:nth-child(4) .nids-fill{background:#4afa7a;animation-delay:0.12s}
+.nids-row:nth-child(5) .nids-fill{background:#e74c3c;animation-delay:0.24s}
+.nids-row:nth-child(6) .nids-fill{background:#e74c3c;animation-delay:0.36s}
+@keyframes nidsFill{0%,27%{width:0}48%,84%{width:var(--pct)}91%,100%{width:0}}
+.nids-score{font-size:0.44rem;color:#ccc;width:28px;text-align:right}
+.nids-composite{font-size:0.48rem;color:#4afa7a;margin-top:1px}
+.nids-verdict{font-size:0.48rem;color:#e74c3c;animation:nidsVerdict 12s ease infinite}
+@keyframes nidsVerdict{0%,66%{opacity:0}70%,84%{opacity:1}91%,100%{opacity:0}}
+.project-card:hover .nids-ticker,.project-card:hover .nids-cur,.project-card:hover .nids-umap,.project-card:hover .nids-out,.project-card:hover .nids-fill,.project-card:hover .nids-verdict{animation-play-state:paused}
 
 
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;max-width:900px}
@@ -846,20 +873,60 @@ footer{
         <a href="https://github.com/insomniackk/networkintrusion" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
       </div>
       <div class="project-demo demo-network">
-        <div class="net-scene">
-          <svg class="net-lines" viewBox="0 0 160 130" fill="none">
-            <line x1="80" y1="65" x2="35" y2="26" stroke="var(--line)" stroke-width="1.5"/>
-            <line x1="80" y1="65" x2="115" y2="23" stroke="var(--line)" stroke-width="1.5"/>
-            <line x1="80" y1="65" x2="26" y2="95" stroke="var(--line)" stroke-width="1.5"/>
-            <line x1="80" y1="65" x2="115" y2="101" stroke="var(--line)" stroke-width="1.5"/>
-            <line x1="80" y1="65" x2="141" y2="60" stroke="var(--line)" stroke-width="1.5"/>
-          </svg>
-          <div class="net-node nn-c"></div>
-          <div class="net-node nn-1"></div>
-          <div class="net-node nn-2"></div>
-          <div class="net-node nn-3"></div>
-          <div class="net-node nn-4"></div>
-          <div class="net-node nn-5"></div>
+        <div class="nids-term">
+          <div class="nids-titlebar"><span></span><span></span><span></span></div>
+          <div class="nids-body">
+            <div class="nids-cmd">$ classify <span class="nids-ticker">CICIDS2017.csv</span><span class="nids-cur">▋</span></div>
+            <div class="nids-umap"><svg viewBox="0 0 202 82" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <rect width="202" height="82" fill="#040c07" rx="3"/>
+              <!-- perspective grid floor -->
+              <g stroke="#2d6b40" stroke-width="0.55" opacity="0.3">
+                <line x1="5" y1="78" x2="170" y2="68"/><line x1="9" y1="69" x2="174" y2="59"/>
+                <line x1="13" y1="60" x2="178" y2="50"/><line x1="16" y1="51" x2="181" y2="41"/>
+                <line x1="20" y1="42" x2="185" y2="32"/>
+                <line x1="5" y1="78" x2="20" y2="42"/><line x1="46" y1="76" x2="61" y2="40"/>
+                <line x1="88" y1="73" x2="103" y2="37"/><line x1="129" y1="71" x2="144" y2="35"/>
+                <line x1="170" y1="68" x2="185" y2="32"/>
+              </g>
+              <!-- BENIGN dots (blue) - spread cluster -->
+              <g fill="#5b9fe8" opacity="0.75">
+                <circle cx="28" cy="50" r="2"/><circle cx="38" cy="54" r="2.5"/>
+                <circle cx="44" cy="44" r="2.2"/><circle cx="52" cy="36" r="1.8"/>
+                <circle cx="56" cy="58" r="2"/><circle cx="63" cy="48" r="2.8"/>
+                <circle cx="70" cy="40" r="2"/><circle cx="48" cy="64" r="1.8"/>
+                <circle cx="35" cy="42" r="1.6"/><circle cx="72" cy="56" r="2.2"/>
+                <circle cx="80" cy="46" r="2.4"/><circle cx="85" cy="34" r="1.6"/>
+                <circle cx="60" cy="68" r="1.8"/><circle cx="90" cy="52" r="2"/>
+                <circle cx="76" cy="62" r="1.6"/><circle cx="40" cy="30" r="1.5"/>
+              </g>
+              <!-- ATTACK dots (red) - tighter cluster -->
+              <g fill="#e55a5a" opacity="0.78">
+                <circle cx="96" cy="60" r="2"/><circle cx="104" cy="52" r="2.8"/>
+                <circle cx="100" cy="44" r="2.2"/><circle cx="112" cy="48" r="2.4"/>
+                <circle cx="108" cy="36" r="2"/><circle cx="118" cy="56" r="2"/>
+                <circle cx="115" cy="40" r="1.8"/><circle cx="124" cy="44" r="2.2"/>
+                <circle cx="106" cy="64" r="1.6"/><circle cx="120" cy="34" r="1.6"/>
+                <circle cx="128" cy="50" r="1.8"/><circle cx="98" cy="54" r="1.5"/>
+              </g>
+              <!-- legend -->
+              <circle cx="152" cy="10" r="2.2" fill="#5b9fe8" opacity="0.8"/>
+              <text x="157" y="13" fill="rgba(140,190,160,0.65)" font-family="monospace" font-size="5">BENIGN</text>
+              <circle cx="152" cy="20" r="2.2" fill="#e55a5a" opacity="0.8"/>
+              <text x="157" y="23" fill="rgba(140,190,160,0.65)" font-family="monospace" font-size="5">ATTACK</text>
+              <text x="7" y="79" fill="rgba(45,107,64,0.55)" font-family="monospace" font-size="4.5">UMAP · 3D</text>
+            </svg></div>
+            <div class="nids-out">
+              <div class="nids-head">Random Forest · 45,143 flows</div>
+              <div class="nids-div">──────────────────────</div>
+              <div class="nids-row"><span class="nids-lbl">BENIGN prec</span><div class="nids-bar"><div class="nids-fill" style="--pct:99.98%"></div></div><span class="nids-score">99.98</span></div>
+              <div class="nids-row"><span class="nids-lbl">BENIGN rec </span><div class="nids-bar"><div class="nids-fill" style="--pct:100%"></div></div><span class="nids-score">100.0</span></div>
+              <div class="nids-row"><span class="nids-lbl">ATTACK prec</span><div class="nids-bar"><div class="nids-fill" style="--pct:100%"></div></div><span class="nids-score">100.0</span></div>
+              <div class="nids-row"><span class="nids-lbl">ATTACK F1  </span><div class="nids-bar"><div class="nids-fill" style="--pct:99.99%"></div></div><span class="nids-score">99.99</span></div>
+              <div class="nids-div">──────────────────────</div>
+              <div class="nids-composite">ACCURACY: 99.99%</div>
+              <div class="nids-verdict">⚠ DDOS DETECTED · 25,724 flows</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
